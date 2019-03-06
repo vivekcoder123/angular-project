@@ -1,0 +1,79 @@
+<div class="row p-4">
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" *ngFor="let post of feeds | paginate: {itemsPerPage:12,currentPage: p}" style="margin-top:2%;">
+<div class="card text-center p-0 rounded-0">
+
+  <div class="card-header text-left">
+      <div>
+      <img src="https://www.pikreview.com{{post.review_img}}" alt="" class="rounded-circle float-left mr-3" style="height:50px;width:50px;">
+      <span class="lead small">@{{post.review_by.name}}</span>
+      </div>
+      <div> 
+
+    <h5 class="card-title" style="text-transform:capitalize;font-weight:600;cursor:pointer;">   
+    <a routerLink="/feed/{{post.postId}}" class="text-dark">{{post.title}}</a>
+    </h5>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <a routerLink="/feed/{{post.postId}}">
+    <img class="card-img-bottom" src="https://www.pikreview.com{{post.imageURL}}" alt="" style="height:300px;cursor:pointer;"></a>
+    <p class="card-text p-4">{{post.description}}</p>
+  </div>
+  <div class="card-footer text-muted">
+    <span class="float-left"><i class="fa fa-eye"></i> {{post.views}}</span>
+      <span class="float-right">
+              <a href="{{post.additionalLinks.BLOG}}" target="_blank"><i class="fa fa-rss p-1" style="color:#ff6600;"></i></a>
+              <a href="{{post.additionalLinks.FB}}" target="_blank"><i class="fa fa-facebook p-1" style="color:#3B5998;"></i></a>
+              <a href="{{post.additionalLinks.IG}}" target="_blank"><i class="fa fa-instagram p-1" style="color:#f40083;"></i></a>
+              <a href="{{post.additionalLinks.PIN}}" target="_blank"><i class="fa fa-pinterest p-1" style="color:#cb2027;"></i></a>
+              <a href="{{post.additionalLinks.YT}}" target="_blank"><i class="fa fa-youtube p-1" style="color:#bb0000;"></i></a>
+              </span>
+  <div style="clear:both;" class="p-0 pt-4">
+            <a href="" class="btn colorCommon btn-block" target="_blank" href="https://pikreview.com{{post.landingUrl}}">Buy Now</a>
+  </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="example" data-backdrop='static' data-keyboard='false'>
+  <div class="modal-dialog" role="document" style="max-width:60%;">
+    <div class="modal-content">
+         <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h3 style="font-weight:600;margin-bottom:4%;">{{post_detail.title}}</h3>
+            <img src="https://pikreview.com{{post_detail.coverPikUrl}}" alt="" style="width:100%;height:345px;">
+             <div class="pt-4">
+              <span class="float-left"><i class="fa fa-eye"></i> {{post_detail.view_count}}</span>
+               <span class="float-right">
+              <a href="{{post_detail.blog}}" target="_blank"><i class="fa fa-rss p-1" style="color:#ff6600;"></i></a>
+              <a href="{{post_detail.fb}}" target="_blank"><i class="fa fa-facebook p-1" style="color:#3B5998;"></i></a>
+              <a href="{{post_detail.ig}}" target="_blank"><i class="fa fa-instagram p-1" style="color:#f40083;"></i></a>
+              <a href="{{post_detail.pin}}" target="_blank"><i class="fa fa-pinterest p-1" style="color:#cb2027;"></i></a>
+              <a href="{{post_detail.yt}}" target="_blank"><i class="fa fa-youtube p-1" style="color:#bb0000;"></i></a>
+              </span>
+            </div>
+            <div style="clear:both;" class="p-0 pt-4">
+            <a href="" class="btn colorCommon btn-block" target="_blank" href="https://pikreview.com{{post_detail.landingUrl}}">Buy Now</a>
+          </div>
+          </div>
+          <div class="col-md-6">
+            <div class="pb-5">
+              <h5 class="float-left">Review By : <span class="lead">{{post_detail.review}}</span></h5>
+              <button (click)="close()" class="close float-right">X</button>
+            </div>
+            <div class="description" style="clear:both;">
+             <p style="white-space:pre-wrap;">{{post_detail.description}}</p>
+           </div>
+           <div class="p-4">
+             <input type="text" placeholder="Leave a comment" class="form-control">
+           </div>
+          </div>
+          
+        </div>      
+      </div>
+    </div>
+  </div>
+</div>
+<pagination-controls (pageChange)="p = $event" class="text-center"></pagination-controls>

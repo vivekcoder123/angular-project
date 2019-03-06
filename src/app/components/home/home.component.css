@@ -1,0 +1,180 @@
+.card-header{
+	background-color: transparent;
+	border-bottom: 0px;
+}
+
+.card-footer{
+	background-color: transparent;
+	border-top: 0px;
+}
+
+.colorCommon{
+	background-color:#10c694;
+	color:white;
+}
+
+.description{
+	max-height:400px;
+	overflow-y:auto;
+	padding:8px;
+}
+
+.hoverUl:hover{
+	text-decoration: underline;
+}
+
+.fa{
+	font-size: 1.2em;
+}
+
+.main__editorial-video {
+
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    height: 345px;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: relative;
+    width: 100vw;
+
+}
+
+.main__editorial-video-container {
+
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+
+}
+
+.main__editorial-video-container video[poster] {
+
+    width: 100%;
+
+}
+
+.main__editorial-video-container video {
+
+    height: auto;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 80%;
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    width: auto;
+
+}
+
+.main__editorial-video-hero {
+
+    margin-top: 45px;
+    max-width: 680px;
+    z-index: 1;
+
+}
+
+.main__editorial-video-intro {
+
+    font-size: 13px;
+    letter-spacing: 2.4px;
+    margin-bottom: 33px;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+
+.main__editorial-video-title {
+
+    font-size: 1.9em;
+    line-height: 1.42;
+    margin-bottom: 45px;
+    max-width: none;
+    font-family: SuisseIntl,Helvetica,sans-serif;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -.2px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    text-align: center;
+
+
+}
+
+.main__editorial-video-actions {
+
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-pack: center;
+    justify-content: center;
+
+}
+
+.main__editorial-video-action.primary {
+
+    background-color: #10c694;
+
+}
+.main__editorial-video-action {
+
+    width: 200px;
+    font-family: SuisseIntl,Helvetica,sans-serif;
+    font-weight: 500;
+    -webkit-appearance: none;
+    border-radius: 110.9px;
+    border-width: 0;
+    color: #fff;
+    height: 40px;
+    font-size: 14px;
+    outline: 0;
+    cursor:pointer;
+
+}
+
+.main__editorial-video-action.secondary {
+
+    background-color: rgba(0,0,0,.3);
+
+}
+.main__editorial-video-action:last-child {
+
+    margin-left: 18px;
+
+}
+
+.navcat{
+	white-space: nowrap;
+	overflow: auto;
+	font-size: 18px;
+}
+
+.horizontalNav{
+  flex-direction: row;
+}
+
+@media screen and (max-width: 767px) {
+
+.main__editorial-video-title {
+    font-size: 0.9em;
+    line-height: 1.42;
+    margin-bottom: 45px;
+    max-width: 80%; 
+}
+
+.main__editorial-video-action {
+    width: 150px;
+}
+
+}

@@ -1,0 +1,24 @@
+.card-header{
+	background-color: transparent;
+	border-bottom: 0px;
+}
+
+.card-footer{
+	background-color: transparent;
+	border-top: 0px;
+}
+
+.colorCommon{
+	background-color:#10c694;
+	color:white;
+}
+
+.description{
+	max-height:400px;
+	overflow-y:auto;
+	padding:8px;
+}
+
+.fa{
+	font-size: 1.2em;
+}
