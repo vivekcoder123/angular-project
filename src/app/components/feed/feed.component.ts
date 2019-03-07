@@ -9,29 +9,11 @@ import { Router,ActivatedRoute } from '@angular/router';
 })
 export class FeedComponent implements OnInit {
 
-  feeds: Object;
-  post_detail: Object;
+  feeds: any[];
 
   constructor(private http:HttpClient,private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit() {
-
-  var id=this.route.snapshot.params.slug;
-
-  if(typeof id == "undefined"){
-   
-  }else{
-   $("#example").modal("show");
-  this.http.get(`https://www.pikreview.com/rest/post.php?f=view&id=${id}`).subscribe(post_detail=>{
-    this.post_detail=post_detail;
-    this.post_detail.rss=post_detail.additionalLinks.BLOG;
-    this.post_detail.fb=post_detail.additionalLinks.FB;
-    this.post_detail.ig=post_detail.additionalLinks.IG;
-    this.post_detail.pin=post_detail.additionalLinks.PIN;
-    this.post_detail.yt=post_detail.additionalLinks.YT;
-    this.post_detail.review=post_detail.review_by.name;
-  }); 
-  }
 
   this.http.get("https://www.pikreview.com/rest/feed.php?f=main").subscribe(feeds=>{
   
@@ -55,13 +37,22 @@ export class FeedComponent implements OnInit {
 
   }
 
-  post_detail(id){
-
-  }
+  feed_detail(id){
+$("#example").modal("show");
+  this.http.get(`https://www.pikreview.com/rest/post.php?f=view&id=${id}`).subscribe((feedData:any[])=>{
+    this.feedData=feedData;
+    this.feedData.rss=feedData.additionalLinks.BLOG;
+    this.feedData.fb=feedData.additionalLinks.FB;
+    this.feedData.ig=feedData.additionalLinks.IG;
+    this.feedData.pin=feedData.additionalLinks.PIN;
+    this.feedData.yt=feedData.additionalLinks.YT;
+    this.feedData.review=feedData.review_by.name;
+    this.images=feedData.images;
+  }); 
+   }
 
    close(){
     $("#example").modal("hide");
-    this.router.navigate(['/feed']);
    }
 
 

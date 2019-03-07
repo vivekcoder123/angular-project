@@ -9,9 +9,8 @@ import { Router } from '@angular/router';
 })
 export class SearchComponent{
 
- products: Object;
- post_detail_search: Object;
-
+ products: any[];
+ 
  constructor(private http:HttpClient,private router:Router) { }
 
 
@@ -36,22 +35,22 @@ export class SearchComponent{
         });
 }
 
- post_detail(id){
+ search_detail(id){
 $("#example").modal("show");
-  this.http.get(`https://www.pikreview.com/rest/post.php?f=view&id=${id}`).subscribe(post_detail=>{
-    this.post_detail=post_detail;
-    this.post_detail.rss=post_detail.additionalLinks.BLOG;
-    this.post_detail.fb=post_detail.additionalLinks.FB;
-    this.post_detail.ig=post_detail.additionalLinks.IG;
-    this.post_detail.pin=post_detail.additionalLinks.PIN;
-    this.post_detail.yt=post_detail.additionalLinks.YT;
-    this.post_detail.review=post_detail.review_by.name;
+  this.http.get(`https://www.pikreview.com/rest/post.php?f=view&id=${id}`).subscribe((searchanswer:any[])=>{
+    this.searchanswer=searchanswer;
+    this.searchanswer.rss=searchanswer.additionalLinks.BLOG;
+    this.searchanswer.fb=searchanswer.additionalLinks.FB;
+    this.searchanswer.ig=searchanswer.additionalLinks.IG;
+    this.searchanswer.pin=searchanswer.additionalLinks.PIN;
+    this.searchanswer.yt=searchanswer.additionalLinks.YT;
+    this.searchanswer.review=searchanswer.review_by.name;
+    this.images=searchanswer.images;
   }); 
    }
 
    close(){
     $("#example").modal("hide");
-    this.router.navigate(['/search-redirect']);
    }
 
 

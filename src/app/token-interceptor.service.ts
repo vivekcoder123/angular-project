@@ -4,19 +4,9 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class TokenInterceptorService implements HttpInterceptor{
+export class TokenInterceptorService{
 
   constructor() { }
 
- intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const jwt = localStorage.getItem('token');
-    if (jwt) {
-     req = req.clone({
-       setHeaders: {
-         'token': `${jwt}`
-       }
-     });
-   }
-   return next.handle(req);
- }
+
 }

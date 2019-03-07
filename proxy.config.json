@@ -1,9 +1,0 @@
-{
-	"/rest/*":{
-		"target":"https://www.pikreview.com",
-		"secure":false,
-        "pathRewrite":{"^/rest":"/new-folder/"},
-         "changeOrigin":true,
-         "logLevel": "debug"
-	}
-}

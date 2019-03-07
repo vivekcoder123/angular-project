@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router'; 
 
@@ -32,7 +31,4 @@ focusAuto(){
   this.router.navigate(['/search']);
   }
 
-   
-
-
-    }
+}

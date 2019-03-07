@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule,Routes } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { CookieService } from 'ngx-cookie-service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { MustMatchDirective } from './_helpers/must-match.directive';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -26,13 +28,11 @@ import { TeamComponent } from './components/team/team.component';
 import { SiteMapComponent } from './components/site-map/site-map.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { TokenInterceptorService } from './token-interceptor.service';
-import { AuthService } from './auth.service';
 import { HomeRedirectComponent } from './Components/home-redirect/home-redirect.component';
 import { DisclosureComponent } from './Components/disclosure/disclosure.component';
 import { FeedRedirectComponent } from './Components/feed-redirect/feed-redirect.component';
 import { SearchRedirectComponent } from './Components/search-redirect/search-redirect.component';
 import { CatSingleComponent } from './Components/cat-single/cat-single.component';
-import { PdetailComponent } from './Components/pdetail/pdetail.component';
 import { SignupComponent } from './Components/signup/signup.component';
 
 const appRoutes : Routes = [
@@ -40,7 +40,6 @@ const appRoutes : Routes = [
 {path : '', component: HomeComponent },
 {path : 'category', component: CategoryComponent },
 {path : 'feed', component: FeedComponent },
-{path : 'feed/:slug', component: FeedComponent },
 {path : 'upload', component: UploadComponent },
 {path : 'login', component: LoginComponent },
 {path : 'search', component: SearchComponent },
@@ -57,12 +56,8 @@ const appRoutes : Routes = [
 {path : 'terms', component: TermsComponent },
 {path : 'users', component: UsersComponent },
 {path : 'disclosure', component: DisclosureComponent },
-{path : 'feed-redirect', component: FeedRedirectComponent },
-{path : 'search-redirect', component: SearchRedirectComponent },
 {path : 'cat-single/:slug', component: CatSingleComponent },
-{path : 'cat-single/:slug/:slug2', component: CatSingleComponent },
-{path : 'pdetail/:slug', component: PdetailComponent },
-{path : 'register', component: SignupComponent}
+{path : 'registration', component: SignupComponent}
 
 ];
 
@@ -92,15 +87,20 @@ const appRoutes : Routes = [
     FeedRedirectComponent,
     SearchRedirectComponent,
     CatSingleComponent,
-    PdetailComponent,
-    SignupComponent
+    SignupComponent,
+    MustMatchDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BrowserAnimationsModule,
+     ToastrModule.forRoot({
+      timeOut: 8000,
+      positionClass: 'toast-top-right'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -19,10 +19,6 @@
 	padding:8px;
 }
 
-.hoverUl:hover{
-	text-decoration: underline;
-}
-
 .fa{
 	font-size: 1.2em;
 }

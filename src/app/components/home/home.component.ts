@@ -11,19 +11,18 @@ import { Router } from '@angular/router';
 
 export class HomeComponent implements OnInit {
 
-  posts: Object;
-  post_detail: Object;
-  categories: Object;
+  posts: any[];
+  categories: any[];
 
   constructor(private http:HttpClient,private router:Router) { 
 
   }
 
   ngOnInit() {
-  this.http.get("https://www.pikreview.com/rest/category.php?mode=2").subscribe(categories=>{
+  this.http.get("https://www.pikreview.com/rest/category.php?mode=2").subscribe((categories:any[])=>{
   this.categories=categories;
   });
-  this.http.get("https://www.pikreview.com/rest/feed.php?f=featured").subscribe(posts=>{
+  this.http.get("https://www.pikreview.com/rest/feed.php?f=featured").subscribe((posts:any[])=>{
   this.posts=posts['items'];
   for(let post of this.posts){
   var id=post.postId;
@@ -46,20 +45,20 @@ export class HomeComponent implements OnInit {
 
 post_detail(id){
 $("#example").modal("show");
-  this.http.get(`https://www.pikreview.com/rest/post.php?f=view&id=${id}`).subscribe(post_detail=>{
-    this.post_detail=post_detail;
-    this.post_detail.rss=post_detail.additionalLinks.BLOG;
-    this.post_detail.fb=post_detail.additionalLinks.FB;
-    this.post_detail.ig=post_detail.additionalLinks.IG;
-    this.post_detail.pin=post_detail.additionalLinks.PIN;
-    this.post_detail.yt=post_detail.additionalLinks.YT;
-    this.post_detail.review=post_detail.review_by.name;
+  this.http.get(`https://www.pikreview.com/rest/post.php?f=view&id=${id}`).subscribe((data:any[])=>{
+    this.data=data;
+    this.data.rss=data.additionalLinks.BLOG;
+    this.data.fb=data.additionalLinks.FB;
+    this.data.ig=data.additionalLinks.IG;
+    this.data.pin=data.additionalLinks.PIN;
+    this.data.yt=data.additionalLinks.YT;
+    this.data.review=data.review_by.name;
+    this.images=data.images;
   }); 
    }
 
    close(){
     $("#example").modal("hide");
-    this.router.navigate(['/home-redirect']);
    }
 
 

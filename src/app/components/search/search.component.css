@@ -56,10 +56,6 @@ text-align: center;
   overflow-y:auto;
 }
 
-.hoverUl:hover{
-  text-decoration: underline;
-}
-
 .fa{
   font-size: 1.2em;
 }
