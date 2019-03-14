@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cat-single',
@@ -9,11 +10,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CatSingleComponent implements OnInit {
 
-  catposts: any[];
+  catposts:any[];
+  loader:boolean;
+  modalShow:boolean;
   
-  constructor(private route:ActivatedRoute,private http:HttpClient) { }
+  constructor(private route:ActivatedRoute,private http:HttpClient,private toastr: ToastrService) { }
 
   ngOnInit() {
+
+  this.loader=true;
+  this.modalShow=false;
 
   var id=this.route.snapshot.params.slug;
     	this.http.get(`https://www.pikreview.com/rest/post.php?f=search&categories=${id}`).subscribe(catposts=>{
@@ -30,6 +36,7 @@ export class CatSingleComponent implements OnInit {
     post.landingUrl=item.landingUrl;
     post.catid=this.route.snapshot.params.slug;
     post.additionalLinks=item.additionalLinks;
+    this.loader=false;
   });
   }
   });
@@ -39,6 +46,7 @@ export class CatSingleComponent implements OnInit {
   }
 
  cat_detail(id){
+ this.modalShow=true;
 $("#example").modal("show");
   this.http.get(`https://www.pikreview.com/rest/post.php?f=view&id=${id}`).subscribe((catdetail:any[])=>{
     this.catdetail=catdetail;
@@ -49,12 +57,24 @@ $("#example").modal("show");
     this.catdetail.yt=catdetail.additionalLinks.YT;
     this.catdetail.review=catdetail.review_by.name;
     this.images=catdetail.images;
+     this.http.get(`https://www.pikreview.com/rest/post.php?f=viewRCat&id=${id}`).subscribe(category=>{
+      this.catdetail.category_id=category.category_id;
+      this.catdetail.category_name=category.category_name;
+    });
   }); 
    }
 
 
    close(){
+   this.modalShow=false;
     $("#example").modal("hide");
+   }
+
+   addComment(id){
+    let comment=$("#commentData").val();
+    this.http.get(`https://www.pikreview.com/bl/manage-review.php?f=sc&comment=${comment}&review_id=${id}`).subscribe((comment:any[])=>{
+      this.toastr.success("Comment added successfully", 'Success!');
+    });
    }
 
 

@@ -10,9 +10,19 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private http:HttpClient,private toastr: ToastrService) { }
+  constructor(private http:HttpClient,private toastr: ToastrService,private router:Router) { }
 
   ngOnInit() {
+
+
+const headers = new HttpHeaders()
+            .set("token", "tj0714r3udhppndn3jal3tka02");
+
+this.http.get(
+        "https://pikreview.com/rest/user.php",{headers}).subscribe(feeds=>{
+
+        });
+
   }
 
   onSubmit(form:NgForm){
@@ -22,33 +32,13 @@ export class LoginComponent implements OnInit {
   password:form.value.password
   })
   ).subscribe(res=>{
-  this.toastr.success('You are logged in successfully', 'Successful!');
    localStorage.setItem('token',res.token);
    var authToken = localStorage.getItem('token');  
-console.log("token is "+authToken);
-
-const headers:HttpHeaders=new HttpHeaders({
-  'token':`${authToken}`
-});
-
-const req=new HttpRequest(
-'GET',
-'https://pikreview.com/rest/user.php?f=feed',
-{
-  headers: headers
-}
-);
-
-this.http.request(req).subscribe(data=>{
-  console.log(data);
-  this.http.get('https://pikreview.com/rest/user.php',{headers:headers}).subscribe(hello=>{
-  console.log(hello);
-  })
-});
-
+   console.log("token is "+authToken);
+   this.router.navigate(['/profile']);
   },error=>{
-  console.log('something went wrong');
-  this.toastr.error('Please enter correct email and password', 'Oops!');
+  console.log(error.error);
+  this.toastr.error(error.error, 'Oops!');
   });
   }
 

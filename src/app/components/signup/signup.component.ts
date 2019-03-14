@@ -21,7 +21,7 @@ instagramId:string;
   ngOnInit() {
   }
   onSignUp(form:NgForm){
-  this.http.post('http://www.pikreview.com/rest/user.php?f=register',
+  this.http.post('https://www.pikreview.com/rest/user.php?f=register',
   JSON.stringify({      
 		email: form.value.email, 
 		password:form.value.password,

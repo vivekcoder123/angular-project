@@ -34,6 +34,7 @@ import { FeedRedirectComponent } from './Components/feed-redirect/feed-redirect.
 import { SearchRedirectComponent } from './Components/search-redirect/search-redirect.component';
 import { CatSingleComponent } from './Components/cat-single/cat-single.component';
 import { SignupComponent } from './Components/signup/signup.component';
+import { ProfileComponent } from './Components/profile/profile.component';
 
 const appRoutes : Routes = [
 
@@ -57,7 +58,8 @@ const appRoutes : Routes = [
 {path : 'users', component: UsersComponent },
 {path : 'disclosure', component: DisclosureComponent },
 {path : 'cat-single/:slug', component: CatSingleComponent },
-{path : 'registration', component: SignupComponent}
+{path : 'registration', component: SignupComponent},
+{path : 'profile', component: ProfileComponent}
 
 ];
 
@@ -88,7 +90,8 @@ const appRoutes : Routes = [
     SearchRedirectComponent,
     CatSingleComponent,
     SignupComponent,
-    MustMatchDirective
+    MustMatchDirective,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

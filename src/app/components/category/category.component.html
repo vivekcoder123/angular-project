@@ -1,4 +1,7 @@
-<div class="row">
+<main style="padding:2% 48%;" *ngIf="loader">
+  <div class="loader"></div>
+</main>
+<div class="row" *ngIf="!loader">
 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pt-5" *ngFor="let post of categories">
   <div class="content rounded">
       <div class="content-overlay" style="opacity:1;"></div>

@@ -9,15 +9,19 @@ import { Router } from '@angular/router';
 })
 export class CategoryComponent implements OnInit {
 
-  categories:Object;
+  categories:any[];
+  loader:boolean;
 
   constructor(private http:HttpClient,private router:Router) { };
 
   ngOnInit() {
 
+  this.loader=true;
+
   this.http.get("https://www.pikreview.com/rest/category.php?mode=2").subscribe(categories=>{
   
   this.categories=categories;
+  this.loader=false;
 
   });
 
