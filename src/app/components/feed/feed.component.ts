@@ -22,7 +22,6 @@ export class FeedComponent implements OnInit {
   this.modalShow=false;
 
   this.http.get("https://www.pikreview.com/rest/feed.php?f=main").subscribe(feeds=>{
-  
   this.feeds=feeds['items'];
   for(let post of this.feeds){
   var id=post.postId;
@@ -31,7 +30,7 @@ export class FeedComponent implements OnInit {
     post.views=item.view_count;
     post.review_by=item.review_by;
     post.review_img=item.coverPikUrl;
-    post.description=item.description.substring(0,200);
+    post.description=item.description;
     post.landingUrl=item.landingUrl;
     post.additionalLinks=item.additionalLinks;
     this.loader=false;
@@ -74,6 +73,36 @@ $("#example").modal("show");
       this.toastr.success("Comment added successfully", 'Success!');
     });
    }
+
+   datePost(){
+
+    this.loader=true;
+  this.modalShow=false;
+
+  this.http.get("https://www.pikreview.com/rest/feed.php?f=main").subscribe(feeds=>{
+   this.feeds = feeds['items'].sort((a,b)=>{
+           return a.date_uploaded==b.date_uploaded?0
+                 :a.date_uploaded>b.date_uploaded?1:-1
+      });
+
+  for(let post of this.feeds){
+  var id=post.postId;
+  this.http.get(`https://www.pikreview.com/rest/post.php?f=view&id=${id}`).subscribe(item=>{
+    post.title=item.title;
+    post.views=item.view_count;
+    post.review_by=item.review_by;
+    post.review_img=item.coverPikUrl;
+    post.description=item.description;
+    post.landingUrl=item.landingUrl;
+    post.additionalLinks=item.additionalLinks;
+    this.loader=false;
+  });
+
+  }
+
+  });
+
+}
 
 
 }

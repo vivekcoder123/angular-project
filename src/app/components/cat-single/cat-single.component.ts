@@ -32,7 +32,7 @@ export class CatSingleComponent implements OnInit {
     post.views=item.view_count;
     post.review_by=item.review_by;
     post.review_img=item.coverPikUrl;
-    post.description=item.description.substring(0,200);
+    post.description=item.description;
     post.landingUrl=item.landingUrl;
     post.catid=this.route.snapshot.params.slug;
     post.additionalLinks=item.additionalLinks;
@@ -77,5 +77,34 @@ $("#example").modal("show");
     });
    }
 
+
+   datePost(){
+
+   this.loader=true;
+  this.modalShow=false;
+
+   var id=this.route.snapshot.params.slug;
+    this.http.get(`https://www.pikreview.com/rest/post.php?f=search&categories=${id}`).subscribe(catposts=>{
+  this.catposts = catposts['items'].sort((a,b)=>{
+           return a.date_uploaded==b.date_uploaded?0
+                 :a.date_uploaded>b.date_uploaded?1:-1
+      });
+  for(let post of this.catposts){
+  var id=post.postId;
+  this.http.get(`https://www.pikreview.com/rest/post.php?f=view&id=${id}`).subscribe(item=>{
+    post.title=item.title;
+    post.views=item.view_count;
+    post.review_by=item.review_by;
+    post.review_img=item.coverPikUrl;
+    post.description=item.description;
+    post.landingUrl=item.landingUrl;
+    post.catid=this.route.snapshot.params.slug;
+    post.additionalLinks=item.additionalLinks;
+    this.loader=false;
+  });
+  }
+  });
+
+   }
 
 }

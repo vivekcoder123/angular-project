@@ -75,7 +75,7 @@ See real reviews Shop genuine products and Share your PikReviews.
   </div>
   <div class="card-body p-0">
     <img class="card-img-bottom" src="http://www.pikreview.com{{post.imageURL}}" alt="" style="height:300px;cursor:pointer;" (click)=search_detail(post.postId)>
-    <p class="card-text p-4">{{post.description}}</p>
+    <p class="card-text p-4">{{post.description.substring(0,200)}}</p>
   </div>
   <div class="card-footer text-muted">
    <span class="float-left"><i class="fa fa-eye"></i> {{post.views}}</span>
@@ -182,7 +182,7 @@ See real reviews Shop genuine products and Share your PikReviews.
                No Comments Yet</h5>
                <h5 class="text-center alert alert-info" *ngIf="searchanswer.comments.length!=0">Comments</h5>
                <li *ngFor="let comment of searchanswer.comments;let i=index">
-                {{i+1}}. {{comment.text}} - {{comment.timestamp}}
+                <p class="">{{i+1}}. {{comment.text}}<br><span class="small">on {{comment.timestamp}}</span></p>
                </li>
              </ul>
            </div>

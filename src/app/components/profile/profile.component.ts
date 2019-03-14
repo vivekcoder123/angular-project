@@ -11,17 +11,11 @@ export class ProfileComponent implements OnInit {
   constructor(private http:HttpClient) { }
 
   ngOnInit() {
-  let authToken=JSON.parse(localStorage.getItem('token'));
-  const headers:HttpHeaders=new HttpHeaders({
-  'token':`${authToken}`
-});
+ 
 
 const req=new HttpRequest(
 'GET',
-'https://pikreview.com/rest/user.php',
-{
-  headers: headers
-}
+'https://pikreview.com/rest/user.php'
 );
 
 this.http.request(req).subscribe(data=>{

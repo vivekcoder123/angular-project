@@ -4,9 +4,15 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class TokenInterceptorService{
+export class TokenInterceptorService implements HttpInterceptor{
 
-  constructor() { }
+   intercept(req: HttpRequest<any>, next: HttpHandler) {
+    const token = localStorage.getItem('token');
+    const authReq = req.clone({
+      headers: req.headers.set('token',token)
+    })
+    return next.handle(authReq)
+  }
 
 
 }

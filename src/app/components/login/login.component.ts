@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient,HttpHeaders,HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-login',
@@ -13,16 +14,6 @@ export class LoginComponent implements OnInit {
   constructor(private http:HttpClient,private toastr: ToastrService,private router:Router) { }
 
   ngOnInit() {
-
-
-const headers = new HttpHeaders()
-            .set("token", "tj0714r3udhppndn3jal3tka02");
-
-this.http.get(
-        "https://pikreview.com/rest/user.php",{headers}).subscribe(feeds=>{
-
-        });
-
   }
 
   onSubmit(form:NgForm){

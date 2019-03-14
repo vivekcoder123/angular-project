@@ -33,6 +33,13 @@
             <ul class="dropdown-menu" style="top:0px;" *ngIf="cat.children.length!=0">
                <li *ngFor="let child of cat.children" class="dropdown-item">
                 <a routerLink="/cat-single/{{child.id}}" class="text-dark">{{child.text}}</a>
+                <div class="dropdown">
+                  <ul class="dropdown-menu" style="top:0px;" *ngIf="child.children.length!=0">
+                   <li *ngFor="let subchild of child.children" class="dropdown-item">
+                   <a routerLink="/cat-single/{{subchild.id}}" class="text-dark">{{subchild.text}}</a>
+                   </li>
+                 </ul>
+               </div>
                </li>
             </ul>
           </li>        

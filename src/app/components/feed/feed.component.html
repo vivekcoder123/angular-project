@@ -1,7 +1,17 @@
 <main style="padding:2% 48%;" *ngIf="loader">
   <div class="loader"></div>
 </main>
+<div class="text-center mt-2" *ngIf="!loader">
+  <h5>Filter By</h5>
+  <button class="btn m-2" (click)="datePost()" style="background-color:#10c694;color:white;">
+  Date Uploaded</button>
+<!--   <button class="btn m-2" (click)="countPost()" style="background-color:#10c694;color:white;">
+  View Count</button> -->
+  <button class="btn m-2" (click)="ngOnInit()" style="background-color:#10c694;color:white;">
+  Reset Filter</button>
+</div>
 <div class="row p-4" *ngIf="!loader">
+
 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" *ngFor="let post of feeds | paginate: {itemsPerPage:12,currentPage: p}" style="margin-top:2%;">
 <div class="card text-center p-0 rounded-0">
 
@@ -19,7 +29,7 @@
   </div>
   <div class="card-body p-0">
     <img class="card-img-bottom" src="http://www.pikreview.com{{post.imageURL}}" alt="" style="height:300px;cursor:pointer;" (click)=feed_detail(post.postId)>
-    <p class="card-text p-4">{{post.description}}</p>
+    <p class="card-text p-4">{{post.description.substring(0,200)}}</p>
   </div>
   <div class="card-footer text-muted">
     <span class="float-left"><i class="fa fa-eye"></i> {{post.views}}</span>
@@ -41,8 +51,7 @@
                   <i class="fa fa-twitter" style="color:white;"></i> Twitter</a>
                </li>
                <li class="dropdown-item">
-               <a href="//pinterest.com/pin/create/link/?url={{post.additionalLinks.BLOG}}
-               &media=http://www.pikreview.com{{post.review_img}}&description={{post.description}}" class="btn" style="background-color:#cb2027;color:white;" target="_blank">
+               <a href="//pinterest.com/pin/create/link/?url={{post.additionalLinks.BLOG}}&media=http://www.pikreview.com{{post.review_img}}&description={{post.description}}" class="btn" style="background-color:#cb2027;color:white;" target="_blank">
                   <i class="fa fa-pinterest" style="color:white;"></i> Pinterest</a>
                </li>
               </ul>
@@ -124,7 +133,7 @@
                No Comments Yet</h5>
                <h5 class="text-center alert alert-info" *ngIf="feedData.comments.length!=0">Comments</h5>
                <li *ngFor="let comment of feedData.comments;let i=index">
-                {{i+1}}. {{comment.text}} - {{comment.timestamp}}
+                <p class="">{{i+1}}. {{comment.text}}<br><span class="small">on {{comment.timestamp}}</span></p>
                </li>
              </ul>
            </div>

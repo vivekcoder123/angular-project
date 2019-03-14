@@ -15,8 +15,7 @@ export class SearchComponent{
  modalShow:boolean;
  
  constructor(private http:HttpClient,private router:Router,private toastr: ToastrService) { }
-
-
+ 
  onKey($event: KeyboardEvent) {
    this.loader=true;
    this.modalShow=false;
@@ -31,14 +30,14 @@ export class SearchComponent{
     post.views=item.view_count;
     post.review_by=item.review_by;
     post.review_img=item.coverPikUrl;
-    post.description=item.description.substring(0,200);
+    post.description=item.description;
     post.landingUrl=item.landingUrl;
     post.additionalLinks=item.additionalLinks;
     this.loader=false;
-  });
+    });
 
-  }
-        });
+    }
+  });
 }
 
  search_detail(id){
@@ -71,6 +70,5 @@ $("#example").modal("show");
       this.toastr.success("Comment added successfully", 'Success!');
     });
    }
-
 
 }
