@@ -14,7 +14,7 @@ confirmPassword:String;
 FirstName:String;
 LastName:String;
 contactNo:String;
-instagramId:string;
+instagramId:String;
 
   constructor(private http:HttpClient,private toastr: ToastrService) { }
 
@@ -33,11 +33,11 @@ instagramId:string;
 		})
   ).subscribe(res=>{
   console.log(res);
-      this.toastr.success(res.statusText, 'Congratulations!');
+      this.toastr.success("You have been registered successfully,please verify your email to login into your pikreview account", 'Congratulations!');
       $("#resetButton").trigger("click");
   },error=>{
   console.log(error);
-      this.toastr.error(error.statusText, 'Error!');
+      this.toastr.error("Some error occured,please contact to the developer", 'Error!');
   });
   
   }

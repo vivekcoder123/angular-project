@@ -27,7 +27,6 @@ import { BloggersComponent } from './components/bloggers/bloggers.component';
 import { TeamComponent } from './components/team/team.component';
 import { SiteMapComponent } from './components/site-map/site-map.component';
 import { BlogComponent } from './components/blog/blog.component';
-import { TokenInterceptorService } from './token-interceptor.service';
 import { HomeRedirectComponent } from './Components/home-redirect/home-redirect.component';
 import { DisclosureComponent } from './Components/disclosure/disclosure.component';
 import { FeedRedirectComponent } from './Components/feed-redirect/feed-redirect.component';

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import * as bootstrap from "bootstrap"; 
+import * as $AB from 'jquery';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,9 @@ import { ToastrService } from 'ngx-toastr';
 export class HomeComponent implements OnInit {
 
   posts:any[];
+  data:any[];
   categories:any[];
+  category:any[];
   modalShow:boolean;
   loader:boolean;
 
@@ -23,14 +27,15 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   this.loader=true;
   this.modalShow=false;
-  this.http.get("https://www.pikreview.com/rest/category.php?mode=2").subscribe((categories:any[])=>{
+  this.http.get<any>("https://www.pikreview.com/rest/category.php?mode=2").subscribe((categories:any[])=>{
   this.categories=categories;
   });
-  this.http.get("https://www.pikreview.com/rest/feed.php?f=featured").subscribe((posts:any[])=>{
+  this.http.get<any>("https://www.pikreview.com/rest/feed.php?f=featured").subscribe((posts:any[])=>{
   this.posts=posts['items'];
   for(let post of this.posts){
   var id=post.postId;
-  this.http.get(`https://www.pikreview.com/rest/post.php?f=view&id=${id}`).subscribe(item=>{
+  this.http.get<any>(`https://www.pikreview.com/rest/post.php?f=view&id=${id}`).subscribe(item=>{
+    if(item!=null){
     post.title=item.title;
     post.views=item.view_count;
     post.review_by=item.review_by;
@@ -39,6 +44,7 @@ export class HomeComponent implements OnInit {
     post.landingUrl=item.landingUrl;
     post.additionalLinks=item.additionalLinks;
     this.loader=false;
+    }
   });
 
   }
@@ -53,16 +59,8 @@ post_detail(id){
 $("#example").modal("show");
   this.http.get(`https://www.pikreview.com/rest/post.php?f=view&id=${id}`).subscribe((data:any[])=>{
     this.data=data;
-    this.data.rss=data.additionalLinks.BLOG;
-    this.data.fb=data.additionalLinks.FB;
-    this.data.ig=data.additionalLinks.IG;
-    this.data.pin=data.additionalLinks.PIN;
-    this.data.yt=data.additionalLinks.YT;
-    this.data.review=data.review_by.name;
-    this.images=data.images;
-    this.http.get(`https://www.pikreview.com/rest/post.php?f=viewRCat&id=${id}`).subscribe((category:any[])=>{
-      this.data.category_id=category.category_id;
-      this.data.category_name=category.category_name;
+    this.http.get<any>(`https://www.pikreview.com/rest/post.php?f=viewRCat&id=${id}`).subscribe((category:any[])=>{
+      this.category=category;
     });  
   }); 
    }
@@ -74,10 +72,36 @@ $("#example").modal("show");
 
    addComment(id){
     let comment=$("#commentData").val();
-    this.http.get(`https://www.pikreview.com/bl/manage-review.php?f=sc&comment=${comment}&review_id=${id}`).subscribe((comment:any[])=>{
+    this.http.get<any>(`https://www.pikreview.com/bl/manage-review.php?f=sc&comment=${comment}&review_id=${id}`).subscribe((comment:any[])=>{
       this.toastr.success("Comment added successfully", 'Success!');
     });
    }
 
+   reviewPost(id){
+
+  this.loader=true;
+  this.modalShow=false;
+  $("#example").modal("hide");
+
+  this.http.get<any>(`https://www.pikreview.com/rest/post.php?f=search&createdBy=${id}`).subscribe(posts=>{
+  this.posts=posts['items'];
+  for(let post of this.posts){
+  var id=post.postId;
+  this.http.get<any>(`https://www.pikreview.com/rest/post.php?f=view&id=${id}`).subscribe(item=>{
+    post.title=item.title;
+    post.views=item.view_count;
+    post.review_by=item.review_by;
+    post.review_img=item.coverPikUrl;
+    post.description=item.description;
+    post.landingUrl=item.landingUrl;
+    post.additionalLinks=item.additionalLinks;
+    this.loader=false;
+  });
+
+  }
+
+  });
+  
+}
 
 }

@@ -18,7 +18,7 @@ export class CategoryComponent implements OnInit {
 
   this.loader=true;
 
-  this.http.get("https://www.pikreview.com/rest/category.php?mode=2").subscribe(categories=>{
+  this.http.get<any>("https://www.pikreview.com/rest/category.php?mode=2").subscribe(categories=>{
   
   this.categories=categories;
   this.loader=false;

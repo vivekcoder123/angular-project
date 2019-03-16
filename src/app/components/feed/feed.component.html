@@ -18,7 +18,7 @@
   <div class="card-header text-left">
       <div>
       <img src="http://www.pikreview.com{{post.review_img}}" alt="" class="rounded-circle float-left mr-3" style="height:50px;width:50px;">
-      <span class="lead small">@{{post.review_by.name}}</span>
+      <span class="lead small" *ngIf="post.review_by">@{{post.review_by.name}}</span>
       </div>
       <div> 
 
@@ -29,7 +29,7 @@
   </div>
   <div class="card-body p-0">
     <img class="card-img-bottom" src="http://www.pikreview.com{{post.imageURL}}" alt="" style="height:300px;cursor:pointer;" (click)=feed_detail(post.postId)>
-    <p class="card-text p-4">{{post.description.substring(0,200)}}</p>
+    <p class="card-text p-4" *ngIf="post.description">{{post.description.substring(0,200)}}</p>
   </div>
   <div class="card-footer text-muted">
     <span class="float-left"><i class="fa fa-eye"></i> {{post.views}}</span>
@@ -42,7 +42,7 @@
               style="color:#bb0000;"></i></a> -->
               <div class="dropup">
               <a data-toggle="dropdown"><i class="fa fa-share"> Share</i></a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu" *ngIf="post.additionalLinks">
                <li class="dropdown-item">
                 <a href="https://www.facebook.com/sharer/sharer.php?u={{post.additionalLinks.BLOG}}" class="btn" style="background-color:#3B5998;color:white;" target="_blank"><i class="fa fa-facebook" style="color:white;"></i> Facebook</a>
                </li>
@@ -67,7 +67,7 @@
 
 <div class="modal" tabindex="-1" role="dialog" id="example">
   <div class="modal-dialog" role="document" style="max-width:60%;">
-    <div class="modal-content">
+    <div class="modal-content" *ngIf="feedData">
          <div class="modal-body">
         <div class="row">
           <div class="col-md-6">
@@ -92,11 +92,11 @@
              <div class="pt-4">
               <span class="float-left"><i class="fa fa-eye"></i> {{feedData.view_count}}</span>
               <span class="float-right">
-              <a href="{{feedData.blog}}" target="_blank"><i class="fa fa-rss p-1" style="color:#ff6600;"></i></a>
-              <a href="{{feedData.fb}}" target="_blank"><i class="fa fa-facebook p-1" style="color:#3B5998;"></i></a>
-              <a href="{{feedData.ig}}" target="_blank"><i class="fa fa-instagram p-1" style="color:#f40083;"></i></a>
-              <a href="{{feedData.pin}}" target="_blank"><i class="fa fa-pinterest p-1" style="color:#cb2027;"></i></a>
-              <a href="{{feedData.yt}}" target="_blank"><i class="fa fa-youtube p-1" style="color:#bb0000;"></i></a>
+              <a href="{{feedData.additionalLinks.BLOG}}" target="_blank"><i class="fa fa-rss p-1" style="color:#ff6600;"></i></a>
+              <a href="{{feedData.additionalLinks.FB}}" target="_blank"><i class="fa fa-facebook p-1" style="color:#3B5998;"></i></a>
+              <a href="{{feedData.additionalLinks.IG}}" target="_blank"><i class="fa fa-instagram p-1" style="color:#f40083;"></i></a>
+              <a href="{{feedData.additionalLinks.PIN}}" target="_blank"><i class="fa fa-pinterest p-1" style="color:#cb2027;"></i></a>
+              <a href="{{feedData.additionalLinks.YT}}" target="_blank"><i class="fa fa-youtube p-1" style="color:#bb0000;"></i></a>
               </span>
             </div>
             <div style="clear:both;" class="p-0 pt-3">
@@ -104,14 +104,14 @@
               <a data-toggle="dropdown"><i class="fa fa-share"> Share</i></a>
               <ul class="dropdown-menu">
                <li class="dropdown-item">
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{feedData.BLOG}}" class="btn" style="background-color:#3B5998;color:white;" target="_blank"><i class="fa fa-facebook" style="color:white;"></i> Facebook</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{feedData.additionalLinks.BLOG}}" class="btn" style="background-color:#3B5998;color:white;" target="_blank"><i class="fa fa-facebook" style="color:white;"></i> Facebook</a>
                </li>
                <li class="dropdown-item">
                 <a href="https://twitter.com/intent/tweet?text={{feedData.title}} :%0A{{feedData.description}}" class="btn" style="background-color:#55ACEE;color:white;" target="_blank">
                   <i class="fa fa-twitter" style="color:white;"></i> Twitter</a>
                </li>
                <li class="dropdown-item">
-               <a href="//pinterest.com/pin/create/link/?url={{feedData.BLOG}}
+               <a href="//pinterest.com/pin/create/link/?url={{feedData.additionalLinks.BLOG}}
                &media=http://www.pikreview.com{{feedData.review_img}}&description={{feedData.description}}" class="btn" style="background-color:#cb2027;color:white;" target="_blank">
                   <i class="fa fa-pinterest" style="color:white;"></i> Pinterest</a>
                </li>
@@ -122,8 +122,8 @@
           </div>
           <div class="col-md-6" *ngIf="modalShow">
             <div class="pb-5">
-              <h5 class="float-left">Review By : <span class="lead">{{feedData.review}}</span>,
-              <a routerLink="/cat-single/{{feedData.category_id}}" (click)="close()" class="text-dark" style="font-weight:600;">{{feedData.category_name}}</a></h5>
+              <h5 class="float-left">Review By : <a class="lead" (click)="reviewPost(feedData.review_by.id)" style="text-decoration:underline;font-weight:600;cursor:pointer;">{{feedData.review_by.name}}</a>,
+              <a routerLink="/cat-single/{{category.category_id}}" (click)="close()" class="text-dark" style="font-weight:600;" *ngIf="category">{{category.category_name}}</a></h5>
               <button (click)="close()" class="close float-right">X</button>
             </div>
             <div class="description" style="clear:both;">

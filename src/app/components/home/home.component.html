@@ -52,7 +52,7 @@
   <div class="card-header text-left">
       <div>
       <img src="http://www.pikreview.com{{post.review_img}}" alt="" class="rounded-circle float-left mr-3" style="height:50px;width:50px;">
-      <span class="lead small">@{{post.review_by.name}}</span>
+      <span class="lead small" *ngIf="post.review_by">@{{post.review_by.name}}</span>
       </div>
       <div> 
     <h5 class="card-title" style="text-transform:capitalize;font-weight:600;cursor:pointer;" (click)=post_detail(post.postId)>   
@@ -62,7 +62,7 @@
   </div>
   <div class="card-body p-0">
     <img class="card-img-bottom" src="http://www.pikreview.com{{post.imageURL}}" alt="" style="height:300px;cursor:pointer;" (click)=post_detail(post.postId)>
-    <p class="card-text p-4">{{post.description.substring(0,200)}}</p>
+    <p class="card-text p-4" *ngIf="post.description">{{post.description.substring(0,200)}}</p>
   </div>
   <div class="card-footer text-muted">
     <span class="float-left"><i class="fa fa-eye"></i> {{post.views}}</span>
@@ -75,7 +75,7 @@
               style="color:#bb0000;"></i></a> -->
               <div class="dropup">
               <a data-toggle="dropdown"><i class="fa fa-share"> Share</i></a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu" *ngIf="post.additionalLinks">
                <li class="dropdown-item">
                 <a href="https://www.facebook.com/sharer/sharer.php?u={{post.additionalLinks.BLOG}}" class="btn" style="background-color:#3B5998;color:white;" target="_blank"><i class="fa fa-facebook" style="color:white;"></i> Facebook</a>
                </li>
@@ -100,14 +100,14 @@
 </div>
 <div class="modal" tabindex="-1" role="dialog" id="example">
   <div class="modal-dialog" role="document" style="max-width:60%;">
-    <div class="modal-content">
+    <div class="modal-content" *ngIf="data">
          <div class="modal-body">
         <div class="row">
           <div class="col-md-6">
             <h3 style="font-weight:600;margin-bottom:4%;">{{data.title}}</h3>
             <div id="demo" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
-  <div class="carousel-item" *ngFor="let img of images let i = index" [ngClass]="{'active' : i == 0}">
+  <div class="carousel-item" *ngFor="let img of data.images let i = index" [ngClass]="{'active' : i == 0}">
       <img src="http://pikreview.com{{img.pikUrl}}" alt="" style="width:100%;height:345px;">
     </div>
   </div>
@@ -122,11 +122,11 @@
              <div class="pt-4">
               <span class="float-left"><i class="fa fa-eye"></i> {{data.view_count}}</span>
               <span class="float-right">
-              <a href="{{data.blog}}" target="_blank"><i class="fa fa-rss p-1" style="color:#ff6600;"></i></a>
-              <a href="{{data.fb}}" target="_blank"><i class="fa fa-facebook p-1" style="color:#3B5998;"></i></a>
-              <a href="{{data.ig}}" target="_blank"><i class="fa fa-instagram p-1" style="color:#f40083;"></i></a>
-              <a href="{{data.pin}}" target="_blank"><i class="fa fa-pinterest p-1" style="color:#cb2027;"></i></a>
-              <a href="{{data.yt}}" target="_blank"><i class="fa fa-youtube p-1" style="color:#bb0000;"></i></a>
+              <a href="{{data.additionalLinks.BLOG}}" target="_blank"><i class="fa fa-rss p-1" style="color:#ff6600;"></i></a>
+              <a href="{{data.additionalLinks.FB}}" target="_blank"><i class="fa fa-facebook p-1" style="color:#3B5998;"></i></a>
+              <a href="{{data.additionalLinks.IG}}" target="_blank"><i class="fa fa-instagram p-1" style="color:#f40083;"></i></a>
+              <a href="{{data.additionalLinks.PIN}}" target="_blank"><i class="fa fa-pinterest p-1" style="color:#cb2027;"></i></a>
+              <a href="{{data.additionalLinks.YT}}" target="_blank"><i class="fa fa-youtube p-1" style="color:#bb0000;"></i></a>
               </span>
             </div>
             <div style="clear:both;" class="p-0 pt-3">
@@ -134,14 +134,14 @@
               <a data-toggle="dropdown"><i class="fa fa-share"> Share</i></a>
               <ul class="dropdown-menu">
                <li class="dropdown-item">
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{data.BLOG}}" class="btn" style="background-color:#3B5998;color:white;" target="_blank"><i class="fa fa-facebook" style="color:white;"></i> Facebook</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{data.additionalLinks.BLOG}}" class="btn" style="background-color:#3B5998;color:white;" target="_blank"><i class="fa fa-facebook" style="color:white;"></i> Facebook</a>
                </li>
                <li class="dropdown-item">
                 <a href="https://twitter.com/intent/tweet?text={{data.title}} :%0A{{data.description}}" class="btn" style="background-color:#55ACEE;color:white;" target="_blank">
                   <i class="fa fa-twitter" style="color:white;"></i> Twitter</a>
                </li>
                <li class="dropdown-item">
-               <a href="//pinterest.com/pin/create/link/?url={{data.BLOG}}
+               <a href="//pinterest.com/pin/create/link/?url={{data.additionalLinks.BLOG}}
                &media=http://www.pikreview.com{{data.review_img}}&description={{data.description}}" class="btn" style="background-color:#cb2027;color:white;" target="_blank">
                   <i class="fa fa-pinterest" style="color:white;"></i> Pinterest</a>
                </li>
@@ -152,8 +152,8 @@
           </div>
           <div class="col-md-6" *ngIf="modalShow">
             <div class="pb-5">
-              <h5 class="float-left">Review By : <span class="lead">{{data.review}}</span>,
-                <a routerLink="/cat-single/{{data.category_id}}" (click)="close()" class="text-dark" style="font-weight:600;">{{data.category_name}}</a></h5>
+              <h5 class="float-left">Review By : <a class="lead" (click)="reviewPost(data.review_by.id)" style="text-decoration:underline;font-weight:600;cursor:pointer;">{{data.review_by.name}}</a>,
+                <a routerLink="/cat-single/{{category.category_id}}" (click)="close()" class="text-dark" style="font-weight:600;" *ngIf="category">{{category.category_name}}</a></h5>
               <button (click)="close()" class="close float-right">X</button>
             </div>
             <div class="description" style="clear:both;">

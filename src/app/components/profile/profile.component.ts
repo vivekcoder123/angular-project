@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient,HttpHeaders,HttpRequest } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -11,14 +11,15 @@ export class ProfileComponent implements OnInit {
   constructor(private http:HttpClient) { }
 
   ngOnInit() {
- 
+ var authToken=localStorage.getItem('token');
+const httpOptions = {
+  headers: new HttpHeaders({
+   'Content-Type':  'application/json',
+   'token': '${authToken}'
+  })
+};
 
-const req=new HttpRequest(
-'GET',
-'https://pikreview.com/rest/user.php'
-);
-
-this.http.request(req).subscribe(data=>{
+this.http.get('https://pikreview.com/rest/user.php',httpOptions).subscribe(data=>{
   console.log(data);
 });
   }
