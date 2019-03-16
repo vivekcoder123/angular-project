@@ -48,3 +48,27 @@
     display: block;
     margin-top: 0;
 }    
+
+@media screen and (max-width: 767px) {
+  
+.reviewCss{
+    padding-top: 1rem;
+}
+
+.loaderCss{
+    padding: 20vh 28vh;
+}
+
+}
+
+@media screen and (min-width: 768px) {
+
+    .modal-dialog{
+        max-width: 60%;
+    }
+
+    .loaderCss{
+    padding: 2% 48%;
+    }
+    
+}

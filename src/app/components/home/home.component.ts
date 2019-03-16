@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   data:any[];
   categories:any[];
   category:any[];
+  p:any[];
   modalShow:boolean;
   loader:boolean;
 
@@ -103,5 +104,6 @@ $("#example").modal("show");
   });
   
 }
+
 
 }

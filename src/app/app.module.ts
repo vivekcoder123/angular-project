@@ -6,8 +6,8 @@ import { RouterModule,Routes } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { MustMatchDirective } from './_helpers/must-match.directive';
 
+import { MustMatchDirective } from './_helpers/must-match.directive';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { CategoryComponent } from './components/category/category.component';
@@ -15,7 +15,6 @@ import { FeedComponent } from './components/feed/feed.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { LoginComponent } from './components/login/login.component';
 import { SearchComponent } from './components/search/search.component';
-import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 import { PostComponent } from './components/post/post.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
@@ -27,13 +26,10 @@ import { BloggersComponent } from './components/bloggers/bloggers.component';
 import { TeamComponent } from './components/team/team.component';
 import { SiteMapComponent } from './components/site-map/site-map.component';
 import { BlogComponent } from './components/blog/blog.component';
-import { HomeRedirectComponent } from './Components/home-redirect/home-redirect.component';
-import { DisclosureComponent } from './Components/disclosure/disclosure.component';
-import { FeedRedirectComponent } from './Components/feed-redirect/feed-redirect.component';
-import { SearchRedirectComponent } from './Components/search-redirect/search-redirect.component';
-import { CatSingleComponent } from './Components/cat-single/cat-single.component';
-import { SignupComponent } from './Components/signup/signup.component';
-import { ProfileComponent } from './Components/profile/profile.component';
+import { DisclosureComponent } from './components/disclosure/disclosure.component';
+import { CatSingleComponent } from './components/cat-single/cat-single.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const appRoutes : Routes = [
 
@@ -44,7 +40,6 @@ const appRoutes : Routes = [
 {path : 'login', component: LoginComponent },
 {path : 'search', component: SearchComponent },
 {path : 'post', component: PostComponent },
-{path : 'home-redirect', component: HomeRedirectComponent },
 {path : 'about', component: AboutComponent },
 {path : 'blog', component: BlogComponent },
 {path : 'bloggers', component: BloggersComponent },
@@ -71,7 +66,6 @@ const appRoutes : Routes = [
     UploadComponent,
     LoginComponent,
     SearchComponent,
-    LoadingSpinnerComponent,
     PostComponent,
     AboutComponent,
     ContactComponent,
@@ -83,10 +77,7 @@ const appRoutes : Routes = [
     TeamComponent,
     SiteMapComponent,
     BlogComponent,
-    HomeRedirectComponent,
     DisclosureComponent,
-    FeedRedirectComponent,
-    SearchRedirectComponent,
     CatSingleComponent,
     SignupComponent,
     MustMatchDirective,

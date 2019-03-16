@@ -15,16 +15,16 @@ export class FeedComponent implements OnInit {
   feeds:any[];
   feedData:any[];
   category:any[];
+  p:any[];
   loader:boolean;
   modalShow:boolean;
 
   constructor(private http:HttpClient,private router:Router,private route:ActivatedRoute,private toastr: ToastrService) { }
 
   ngOnInit() {
-
+  
   this.loader=true;
   this.modalShow=false;
-
   this.http.get<any>("https://www.pikreview.com/rest/feed.php?f=main").subscribe(feeds=>{
   this.feeds=feeds['items'];
   for(let post of this.feeds){
@@ -45,7 +45,6 @@ export class FeedComponent implements OnInit {
   }
 
   });
-
 
   }
 
@@ -76,7 +75,6 @@ $("#example").modal("show");
 
     this.loader=true;
   this.modalShow=false;
-
   this.http.get<any>("https://www.pikreview.com/rest/feed.php?f=main").subscribe(feeds=>{
    this.feeds = feeds['items'].sort((a,b)=>{
            return a.date_uploaded==b.date_uploaded?0
@@ -107,7 +105,6 @@ reviewPost(id){
   this.loader=true;
   this.modalShow=false;
   $("#example").modal("hide");
-
   this.http.get<any>(`https://www.pikreview.com/rest/post.php?f=search&createdBy=${id}`).subscribe(feeds=>{
   this.feeds=feeds['items'];
   for(let post of this.feeds){
@@ -128,6 +125,5 @@ reviewPost(id){
   });
   
 }
-
 
 }

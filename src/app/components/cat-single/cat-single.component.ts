@@ -15,6 +15,7 @@ export class CatSingleComponent implements OnInit {
   catposts:any[];
   catdetail:any[];
   category:any[];
+  p:any[];
   loader:boolean;
   modalShow:boolean;
 

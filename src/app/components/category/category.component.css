@@ -79,3 +79,17 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+@media screen and (max-width: 767px) {
+  
+.loaderCss{
+    padding: 20vh 28vh;
+}
+
+}
+
+@media screen and (min-width: 768px) {
+  .loaderCss{
+    padding: 2% 48%;
+    }
+}

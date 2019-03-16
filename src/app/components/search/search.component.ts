@@ -10,10 +10,12 @@ import * as $AB from 'jquery';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
+
 export class SearchComponent{
  searchanswer:any[];
  products:any[];
  category:any[];
+ p:any[];
  loader:boolean;
  modalShow:boolean;
  

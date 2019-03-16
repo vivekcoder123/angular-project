@@ -22,7 +22,7 @@
 
   </div>
 
-<main style="padding:2% 48%;" *ngIf="loader">
+<main *ngIf="loader" class="loaderCss">
   <div class="loader"></div>
 </main>
   <nav class="navbar navbar-expand-md bg-light navbar-light navcat" *ngIf="!loader">
@@ -99,11 +99,11 @@
 </div>
 </div>
 <div class="modal" tabindex="-1" role="dialog" id="example">
-  <div class="modal-dialog" role="document" style="max-width:60%;">
+  <div class="modal-dialog" role="document">
     <div class="modal-content" *ngIf="data">
          <div class="modal-body">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <h3 style="font-weight:600;margin-bottom:4%;">{{data.title}}</h3>
             <div id="demo" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
@@ -150,8 +150,8 @@
             <a href="" class="btn colorCommon btn-block" target="_blank" href="https://pikreview.com{{data.landingUrl}}">Buy Now</a>
           </div>
           </div>
-          <div class="col-md-6" *ngIf="modalShow">
-            <div class="pb-5">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" *ngIf="modalShow">
+            <div class="pb-5 reviewCss">
               <h5 class="float-left">Review By : <a class="lead" (click)="reviewPost(data.review_by.id)" style="text-decoration:underline;font-weight:600;cursor:pointer;">{{data.review_by.name}}</a>,
                 <a routerLink="/cat-single/{{category.category_id}}" (click)="close()" class="text-dark" style="font-weight:600;" *ngIf="category">{{category.category_name}}</a></h5>
               <button (click)="close()" class="close float-right">X</button>
@@ -177,4 +177,4 @@
     </div>
   </div>
 </div>
-<pagination-controls (pageChange)="p = $event" class="text-center"></pagination-controls>
+<pagination-controls (pageChange)="p=$event" class="text-center"></pagination-controls>

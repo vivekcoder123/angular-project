@@ -21,7 +21,7 @@ instagramId:String;
   ngOnInit() {
   }
   onSignUp(form:NgForm){
-  this.http.post('https://www.pikreview.com/rest/user.php?f=register',
+  this.http.post<any>('https://www.pikreview.com/rest/user.php?f=register',
   JSON.stringify({      
 		email: form.value.email, 
 		password:form.value.password,
@@ -33,8 +33,14 @@ instagramId:String;
 		})
   ).subscribe(res=>{
   console.log(res);
-      this.toastr.success("You have been registered successfully,please verify your email to login into your pikreview account", 'Congratulations!');
-      $("#resetButton").trigger("click");
+  if(res.error_code==1001){
+  this.toastr.error("Please enter correct email and password", 'Wrong!');
+  }else{
+  this.toastr.success("You have been registered successfully,please verify your email to login into your pikreview account", 'Congratulations!');
+   $("#resetButton").trigger("click");
+  }
+      
+     
   },error=>{
   console.log(error);
       this.toastr.error("Some error occured,please contact to the developer", 'Error!');
